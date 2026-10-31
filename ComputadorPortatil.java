@@ -1,9 +1,24 @@
 public class ComputadorPortatil {
-    String Serial;
-    String Marca;
-    float Tamañopulgadas;
-    float Precio;
+    private String Serial;
+    private String Marca;
+    private float Tamañopulgadas;
+    private float Precio;
+    private int SistemaOperativo;
+    private int Procesador;
     
+    
+    public int getSistemaOperativo() {
+        return SistemaOperativo;
+    }
+    public void setSistemaOperativo(int sistemaOperativo) {
+        SistemaOperativo = sistemaOperativo;
+    }
+    public int getProcesador() {
+        return Procesador;
+    }
+    public void setProcesador(int procesador) {
+        Procesador = procesador;
+    }
     public ComputadorPortatil() {
     }
     public String getSerial() {

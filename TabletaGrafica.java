@@ -1,9 +1,10 @@
 public class TabletaGrafica {
-    String Serial;
-    String Marca;
-    float TamañoPulgadas;
-    float Precio;
-    float PesoKg;
+    private String Serial;
+    private String Marca;
+    private float TamañoPulgadas;
+    private float Precio;
+    private float PesoKg;
+    private String Almacenamiento;
     public TabletaGrafica() {
     }
     public String getSerial() {
@@ -35,6 +36,12 @@ public class TabletaGrafica {
     }
     public void setPesoKg(float pesoKg) {
         PesoKg = pesoKg;
+    }
+    public String getAlmacenamiento() {
+        return Almacenamiento;
+    }
+    public void setAlmacenamiento(String almacenamiento) {
+        Almacenamiento = almacenamiento;
     }
 
 }
