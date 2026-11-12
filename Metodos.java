@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Metodos {
     Metodos M = new Metodos();
     Validaciones V = new Validaciones();
-
     /*
      * Método con submenú para almacenamiento:
      * 256 GB
@@ -18,13 +17,13 @@ public class Metodos {
         int opt = V.ValidarEntero(sc);
         return opt;
     }
-
     /*
      * Submenú para Sistema Operativo:
      * Windows 7
      * Windows 10
      * Windows 11
      */
+
     public int SubMenuSistemOperativo(Scanner sc) {
         System.out.println("Seleccione su Sistema Operativo");
         System.out.println("1: Windows 7");

@@ -13,12 +13,14 @@ public class main {
             System.out.println("3: Imprimir inventario total");
             System.out.println("4: Salir del programa");
 
-            int opt = M.ValidarEntero(sc);
+            int opt = V.ValidarEntero(sc);
             switch (opt) {
                 case 1:
+                    M.SubMenuEstuInge(sc);
 
                     break;
                 case 2:
+                    M.SubMenuEstuDiseño(sc);
 
                     break;
                 case 3:
