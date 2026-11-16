@@ -23,38 +23,20 @@ public class Validaciones {
         return sc.nextDouble();
     }
 
-    public boolean ValidarSoloLetras(String texto) {
-        return texto != null && texto.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+$");
-    }
-
-    /** Solo dígitos (cédula, teléfono). */
     public boolean ValidarSoloNumeros(String texto) {
         return texto != null && texto.matches("^[0-9]+$");
     }
 
-    /** Pide un texto con solo letras; se llama a sí mismo hasta que sea válido. */
     public String PedirLetras(Scanner sc, String mensaje) {
         System.out.println(mensaje);
         String texto = sc.next();
-        if (ValidarSoloLetras(texto)) {
+        if (ValidarTexto(texto)) {
             return texto;
         }
         System.out.println("Error: solo se permiten letras (sin numeros ni caracteres especiales).");
         return PedirLetras(sc, mensaje);
     }
 
-    /** Pide un texto alfanumérico (letras y números, sin caracteres especiales). */
-    public String PedirAlfanumerico(Scanner sc, String mensaje) {
-        System.out.println(mensaje);
-        String texto = sc.next();
-        if (!texto.isEmpty() && ValidarTexto(texto)) {
-            return texto;
-        }
-        System.out.println("Error: solo se permiten letras y numeros (sin caracteres especiales).");
-        return PedirAlfanumerico(sc, mensaje);
-    }
-
-    /** Pide un texto con solo dígitos (cédula, teléfono). */
     public String PedirNumerico(Scanner sc, String mensaje) {
         System.out.println(mensaje);
         String texto = sc.next();
@@ -65,7 +47,6 @@ public class Validaciones {
         return PedirNumerico(sc, mensaje);
     }
 
-    /** Pide un entero dentro de un rango [min, max]. */
     public int PedirEnteroRango(Scanner sc, String mensaje, int min, int max) {
         System.out.println(mensaje);
         String texto = sc.next();
@@ -81,7 +62,6 @@ public class Validaciones {
         return PedirEnteroRango(sc, mensaje, min, max);
     }
 
-    /** Pide un decimal dentro de un rango [min, max]. */
     public float PedirDecimalRango(Scanner sc, String mensaje, float min, float max) {
         System.out.println(mensaje);
         String texto = sc.next().replace(',', '.');

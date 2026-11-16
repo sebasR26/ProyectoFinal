@@ -70,7 +70,7 @@ public class GestionPrestamos {
         e.setTelefono(V.PedirNumerico(sc, "Ingrese el telefono"));
         e.setNumeroSemestre(V.PedirEnteroRango(sc, "Ingrese el numero de semestre (1-12)", 1, 12));
         e.setPromedioAcumulado(V.PedirDecimalRango(sc, "Ingrese el promedio acumulado (0.0 - 5.0)", 0f, 5f));
-        e.setSerialEquipo(V.PedirAlfanumerico(sc, "Ingrese el serial del equipo"));
+        e.setSerialEquipo(V.PedirLetras(sc, "Ingrese el serial del equipo"));
         ingenieros.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
@@ -103,7 +103,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarIngenieroPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
         } else {
-            e = BuscarIngenieroPorSerial(V.PedirAlfanumerico(sc, "Ingrese el serial"));
+            e = BuscarIngenieroPorSerial(V.PedirLetras(sc, "Ingrese el serial"));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
@@ -194,7 +194,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarIngenieroPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
         } else {
-            e = BuscarIngenieroPorSerial(V.PedirAlfanumerico(sc, "Ingrese el serial"));
+            e = BuscarIngenieroPorSerial(V.PedirLetras(sc, "Ingrese el serial"));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
