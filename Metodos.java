@@ -1,14 +1,11 @@
-import java.util.LinkedList;
+
 import java.util.Scanner;
 
 public class Metodos {
     Validaciones V = new Validaciones();
     GestionPrestamos G = new GestionPrestamos(this);
 
-    private LinkedList<EstudianteIngenieria> ingenieros = new LinkedList<>();
-    private LinkedList<studianteDiseno> disenadores = new LinkedList<>();
-    private LinkedList<ComputadorPortatil> portatil = new LinkedList<>();
-    private LinkedList<TabletaGrafica> tableta = new LinkedList<>();
+    
  
     public int SubMenuAlmacenamiento(Scanner sc) {
         System.out.println("Seleccione su Almacenamiento");
