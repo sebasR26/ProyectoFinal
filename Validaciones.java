@@ -23,4 +23,57 @@ public class Validaciones {
         return sc.nextDouble();
     }
 
+    public boolean ValidarSoloNumeros(String texto) {
+        return texto != null && texto.matches("^[0-9]+$");
+    }
+
+    public String PedirLetras(Scanner sc, String mensaje) {
+        System.out.println(mensaje);
+        String texto = sc.next();
+        if (ValidarTexto(texto)) {
+            return texto;
+        }
+        System.out.println("Error: solo se permiten letras (sin numeros ni caracteres especiales).");
+        return PedirLetras(sc, mensaje);
+    }
+
+    public String PedirNumerico(Scanner sc, String mensaje) {
+        System.out.println(mensaje);
+        String texto = sc.next();
+        if (ValidarSoloNumeros(texto)) {
+            return texto;
+        }
+        System.out.println("Error: solo se permiten digitos.");
+        return PedirNumerico(sc, mensaje);
+    }
+
+    public int PedirEnteroRango(Scanner sc, String mensaje, int min, int max) {
+        System.out.println(mensaje);
+        String texto = sc.next();
+        try {
+            int valor = Integer.parseInt(texto);
+            if (valor >= min && valor <= max) {
+                return valor;
+            }
+        } catch (NumberFormatException e) {
+            // cae al mensaje de error
+        }
+        System.out.println("Error: ingrese un numero entero entre " + min + " y " + max + ".");
+        return PedirEnteroRango(sc, mensaje, min, max);
+    }
+
+    public float PedirDecimalRango(Scanner sc, String mensaje, float min, float max) {
+        System.out.println(mensaje);
+        String texto = sc.next().replace(',', '.');
+        try {
+            float valor = Float.parseFloat(texto);
+            if (valor >= min && valor <= max) {
+                return valor;
+            }
+        } catch (NumberFormatException e) {
+            // cae al mensaje de error
+        }
+        System.out.println("Error: ingrese un numero decimal entre " + min + " y " + max + ".");
+        return PedirDecimalRango(sc, mensaje, min, max);
+    }
 }
