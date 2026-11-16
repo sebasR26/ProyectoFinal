@@ -52,7 +52,7 @@ public class Metodos {
      * No se permiten caracteres especiales ni números en campos de texto (marca,
      * serial, etc.).
      */
-    public void SubMenuEstuInge(Scanner sc) {
+    public boolean SubMenuEstuInge(Scanner sc) {
         boolean volver = false;
         while (!volver) {
             System.out.println("Que deseas Realizar");
@@ -83,9 +83,10 @@ public class Metodos {
                     break;
             }
         }
+        return true;
     }
 
-    public void SubMenuEstuDiseño(Scanner sc) {
+    public boolean SubMenuEstuDiseño(Scanner sc) {
         boolean volver = false;
         while (!volver) {
             System.out.println("Que deseas Realizar");
@@ -116,5 +117,6 @@ public class Metodos {
                     break;
             }
         }
+        return true;
     }
 }

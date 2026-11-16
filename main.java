@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
+        
+    
         Metodos M = new Metodos();
         Validaciones V = new Validaciones();
         Scanner sc = new Scanner(System.in);
