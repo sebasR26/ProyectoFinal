@@ -59,6 +59,10 @@ public class GestionPrestamos {
         return BuscarIngenieroPorCedula(cedula) != null || BuscarDisenadorPorCedula(cedula) != null;
     }
 
+    public boolean serialDuplicado(String serial) {
+        return BuscarIngenieroPorSerial(serial) != null || BuscarDisenadorPorSerial(serial) != null;
+    }
+
     private String PedirModalidad(Scanner sc) {
         int opt = V.PedirEnteroRango(sc, "Modalidad de estudio: 1: Virtual, 2: Presencial", 1, 2);
         return opt == 1 ? "Virtual" : "Presencial";
@@ -79,7 +83,16 @@ public class GestionPrestamos {
         e.setTelefono(V.PedirNumerico(sc, "Ingrese el telefono"));
         e.setNumeroSemestre(V.PedirEnteroRango(sc, "Ingrese el numero de semestre (1-12)", 1, 12));
         e.setPromedioAcumulado(V.PedirDecimalRango(sc, "Ingrese el promedio acumulado (0.0 - 5.0)", 0f, 5f));
-        e.setSerialEquipo(V.PedirLetras(sc, "Ingrese el serial del equipo"));
+
+        String serial = V.PedirLetras(sc, "Ingrese el serial del equipo");
+        if (serialDuplicado(serial)) {
+            System.out.println("Error: el equipo con serial: " + serial + " ya esta asignado.");
+            return false;
+        }
+        e.setSerialEquipo(serial);
+
+
+
         RegistrarEquipo(sc, e.getSerialEquipo());
         ingenieros.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
@@ -99,8 +112,16 @@ public class GestionPrestamos {
         e.setTelefono(V.PedirNumerico(sc, "Ingrese el telefono"));
         e.setModalidadEstudio(PedirModalidad(sc));
         e.setCantidadAsignaturas(V.PedirEnteroRango(sc, "Ingrese la cantidad de asignaturas (1-12)", 1, 12));
-        e.setSerialEquipo(V.PedirEnteroRango(sc, "Ingrese el serial del equipo (numerico)", 1, Integer.MAX_VALUE));
-        RegistrarEquipo(sc, String.valueOf(e.getSerialEquipo()));
+
+        int serial = V.PedirEnteroRango(sc, "Ingrese el serial del equipo", 1, Integer.MAX_VALUE);
+        if (serialDuplicado(String.valueOf(serial))) {
+            System.out.println("Error: el equipo con serial: " + serial + " ya esta asignado.");
+            return false;
+        }
+        e.setSerialEquipo(serial);
+
+
+        RegistrarEquipo(sc, String.valueOf(serial));
         disenadores.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
