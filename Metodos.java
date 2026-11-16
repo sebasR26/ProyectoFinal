@@ -1,8 +1,14 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Metodos {
     Validaciones V = new Validaciones();
     GestionPrestamos G = new GestionPrestamos(this);
+
+    private LinkedList<EstudianteIngenieria> ingenieros = new LinkedList<>();
+    private LinkedList<studianteDiseno> disenadores = new LinkedList<>();
+    private LinkedList<ComputadorPortatil> portatil = new LinkedList<>();
+    private LinkedList<TabletaGrafica> tableta = new LinkedList<>();
  
     public int SubMenuAlmacenamiento(Scanner sc) {
         System.out.println("Seleccione su Almacenamiento");
@@ -98,12 +104,14 @@ public class Metodos {
         return true;
     }
 
+    
+
     /** Opción 3 del menú principal: imprime los cuatro vectores. */
     public boolean ImprimirInventarioTotal() {
-        G.ImprimirIngenieros();
+        
+        System.out.println("-----------------------------");
         G.ImprimirDisenadores();
-        G.ImprimirPortatiles();
-        G.ImprimirTabletas();
+        
         return true;
     }
 }

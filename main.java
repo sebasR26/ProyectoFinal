@@ -25,6 +25,7 @@ public class Main {
 
                     break;
                 case 3:
+                    M.ImprimirInventarioTotal();
 
                     break;
                 case 4:
