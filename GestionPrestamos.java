@@ -300,7 +300,7 @@ public class GestionPrestamos {
     public boolean ImprimirIngenieros() {
         System.out.println("---- Estudiantes de Ingenieria (" + ingenieros.size() + ") ----");
         for (EstudianteIngenieria e : ingenieros) {
-            System.out.println("Cedula: " + e.getCedula() + "\n" + e.getNombre() + " " + e.getApellido()
+            System.out.println("\nCedula: " + e.getCedula() + "\n" + e.getNombre() + " " + e.getApellido()
                     + "\nTel: " + e.getTelefono() + "\nSemestre: " + e.getNumeroSemestre()
                     + "\nPromedio: " + e.getPromedioAcumulado() + "\nSerial equipo: " + e.getSerialEquipo());
         }
@@ -310,13 +310,32 @@ public class GestionPrestamos {
     public boolean ImprimirDisenadores() {
         System.out.println("Estudiantes de Diseno (" + disenadores.size() + ") ");
         for (studianteDiseno e : disenadores) {
-            System.out.println("Cedula: " + e.getCedula() + "\n" + e.getNombre() + " " + e.getApellido()
+            System.out.println("\nCedula: " + e.getCedula() + "\n" + e.getNombre() + " " + e.getApellido()
                     + "\nTel: " + e.getTelefono() + "\nModalidad: " + e.getModalidadEstudio()
                     + "\nAsignaturas: " + e.getCantidadAsignaturas() + "\nSerial equipo: " + e.getSerialEquipo());
         }
         return !disenadores.isEmpty();
     }
+
+    public boolean ImprimirPortatiles() {
+        System.out.println("Computadores portatiles (" + portatil.size() + ") ");
+        for (ComputadorPortatil c : portatil) {
+            System.out.println("\nSerial: " + c.getSerial() + "\nMarca: " + c.getMarca()
+                    + "\nTamano: " + c.getTamañopulgadas() + "\nPrecio: " + c.getPrecio()
+                    + "\nSO: " + c.getSistemaOperativo() + "\nProcesador: " + c.getProcesador());
+        }
+        return !portatil.isEmpty();
+    }
     
+    public boolean ImprimirTabletas() {
+        System.out.println("Tabletas graficas (" + tableta.size() + ") ");
+        for (TabletaGrafica t : tableta) {
+            System.out.println("\nSerial: " + t.getSerial() + "\nMarca: " + t.getMarca()
+                    + "\nTamano: " + t.getTamañoPulgadas() + "\nPrecio: " + t.getPrecio()
+                    + "\nPeso: " + t.getPesoKg() + "\nAlmacenamiento: " + t.getAlmacenamiento());
+        }
+        return !tableta.isEmpty();
+    }
 
    
 }

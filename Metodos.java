@@ -109,8 +109,12 @@ public class Metodos {
     /** Opción 3 del menú principal: imprime los cuatro vectores. */
     public boolean ImprimirInventarioTotal() {
         G.ImprimirIngenieros();
-        System.out.println("-----------------------------");
+        System.out.println("=================");
         G.ImprimirDisenadores();
+        System.out.println("=================");
+        G.ImprimirPortatiles();
+        System.out.println("=================");
+        G.ImprimirTabletas();
         
         return true;
     }
