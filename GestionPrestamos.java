@@ -297,7 +297,15 @@ public class GestionPrestamos {
 
     // Devuelven true si el vector tiene elementos y false si está vacío.
 
-    
+    public boolean ImprimirIngenieros() {
+        System.out.println("---- Estudiantes de Ingenieria (" + ingenieros.size() + ") ----");
+        for (EstudianteIngenieria e : ingenieros) {
+            System.out.println("Cedula: " + e.getCedula() + "\n" + e.getNombre() + " " + e.getApellido()
+                    + "\nTel: " + e.getTelefono() + "\nSemestre: " + e.getNumeroSemestre()
+                    + "\nPromedio: " + e.getPromedioAcumulado() + "\nSerial equipo: " + e.getSerialEquipo());
+        }
+        return !ingenieros.isEmpty();
+    }
 
     public boolean ImprimirDisenadores() {
         System.out.println("Estudiantes de Diseno (" + disenadores.size() + ") ");

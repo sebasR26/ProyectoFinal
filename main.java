@@ -9,7 +9,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         boolean cont = true;
         while (cont) {
-            System.out.println("1: Estudiantes de Ingeniería");
+            System.out.println("\n1: Estudiantes de Ingeniería");
             System.out.println("2: Estudiantes de Diseño");
             System.out.println("3: Imprimir inventario total");
             System.out.println("4: Salir del programa");
