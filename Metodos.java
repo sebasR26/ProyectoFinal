@@ -98,12 +98,5 @@ public class Metodos {
         return true;
     }
 
-    /** Opción 3 del menú principal: imprime los cuatro vectores. */
-    public boolean ImprimirInventarioTotal() {
-        G.ImprimirIngenieros();
-        G.ImprimirDisenadores();
-        G.ImprimirPortatiles();
-        G.ImprimirTabletas();
-        return true;
-    }
+   
 }

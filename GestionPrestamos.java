@@ -290,43 +290,4 @@ public class GestionPrestamos {
 
     // Devuelven true si el vector tiene elementos y false si está vacío.
 
-    public boolean ImprimirIngenieros() {
-        System.out.println("---- Estudiantes de Ingenieria (" + ingenieros.size() + ") ----");
-        for (EstudianteIngenieria e : ingenieros) {
-            System.out.println("Cedula: " + e.getCedula() + " | " + e.getNombre() + " " + e.getApellido()
-                    + " | Tel: " + e.getTelefono() + " | Semestre: " + e.getNumeroSemestre()
-                    + " | Promedio: " + e.getPromedioAcumulado() + " | Serial equipo: " + e.getSerialEquipo());
-        }
-        return !ingenieros.isEmpty();
-    }
-
-    public boolean ImprimirDisenadores() {
-        System.out.println("Estudiantes de Diseno (" + disenadores.size() + ") ");
-        for (studianteDiseno e : disenadores) {
-            System.out.println("Cedula: " + e.getCedula() + " | " + e.getNombre() + " " + e.getApellido()
-                    + " | Tel: " + e.getTelefono() + " | Modalidad: " + e.getModalidadEstudio()
-                    + " | Asignaturas: " + e.getCantidadAsignaturas() + " | Serial equipo: " + e.getSerialEquipo());
-        }
-        return !disenadores.isEmpty();
-    }
-
-    public boolean ImprimirPortatiles() {
-        System.out.println("Computadores portatiles (" + portatil.size() + ") ");
-        for (ComputadorPortatil c : portatil) {
-            System.out.println("Serial: " + c.getSerial() + " | Marca: " + c.getMarca()
-                    + " | Tamano: " + c.getTamañopulgadas() + " | Precio: " + c.getPrecio()
-                    + " | SO: " + c.getSistemaOperativo() + " | Procesador: " + c.getProcesador());
-        }
-        return !portatil.isEmpty();
-    }
-
-    public boolean ImprimirTabletas() {
-        System.out.println("Tabletas graficas (" + tableta.size() + ") ");
-        for (TabletaGrafica t : tableta) {
-            System.out.println("Serial: " + t.getSerial() + " | Marca: " + t.getMarca()
-                    + " | Tamano: " + t.getTamañoPulgadas() + " | Precio: " + t.getPrecio()
-                    + " | Peso: " + t.getPesoKg() + " | Almacenamiento: " + t.getAlmacenamiento());
-        }
-        return !tableta.isEmpty();
-    }
 }
