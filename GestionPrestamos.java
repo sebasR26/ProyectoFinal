@@ -51,9 +51,16 @@ public class GestionPrestamos {
         return null;
     }
 
-    /** El estudiante ya tiene equipo si su cédula está registrada en cualquiera de las dos listas. */
+    /**
+     * El estudiante ya tiene equipo si su cédula está registrada en cualquiera de
+     * las dos listas.
+     */
     public boolean EstudianteTieneEquipo(String cedula) {
         return BuscarIngenieroPorCedula(cedula) != null || BuscarDisenadorPorCedula(cedula) != null;
+    }
+
+    public boolean serialDuplicado(String serial) {
+        return BuscarIngenieroPorSerial(serial) != null || BuscarDisenadorPorSerial(serial) != null;
     }
 
     private String PedirModalidad(Scanner sc) {
@@ -76,7 +83,16 @@ public class GestionPrestamos {
         e.setTelefono(V.PedirNumerico(sc, "Ingrese el telefono"));
         e.setNumeroSemestre(V.PedirEnteroRango(sc, "Ingrese el numero de semestre (1-12)", 1, 12));
         e.setPromedioAcumulado(V.PedirDecimalRango(sc, "Ingrese el promedio acumulado (0.0 - 5.0)", 0f, 5f));
-        e.setSerialEquipo(V.PedirLetras(sc, "Ingrese el serial del equipo"));
+
+        String serial = V.PedirLetras(sc, "Ingrese el serial del equipo");
+        if (serialDuplicado(serial)) {
+            System.out.println("Error: el equipo con serial: " + serial + " ya esta asignado.");
+            return false;
+        }
+        e.setSerialEquipo(serial);
+
+
+
         RegistrarEquipo(sc, e.getSerialEquipo());
         ingenieros.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
@@ -96,8 +112,16 @@ public class GestionPrestamos {
         e.setTelefono(V.PedirNumerico(sc, "Ingrese el telefono"));
         e.setModalidadEstudio(PedirModalidad(sc));
         e.setCantidadAsignaturas(V.PedirEnteroRango(sc, "Ingrese la cantidad de asignaturas (1-12)", 1, 12));
-        e.setSerialEquipo(V.PedirEnteroRango(sc, "Ingrese el serial del equipo (numerico)", 1, Integer.MAX_VALUE));
-        RegistrarEquipo(sc, String.valueOf(e.getSerialEquipo()));
+
+        int serial = V.PedirEnteroRango(sc, "Ingrese el serial del equipo", 1, Integer.MAX_VALUE);
+        if (serialDuplicado(String.valueOf(serial))) {
+            System.out.println("Error: el equipo con serial: " + serial + " ya esta asignado.");
+            return false;
+        }
+        e.setSerialEquipo(serial);
+
+
+        RegistrarEquipo(sc, String.valueOf(serial));
         disenadores.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
@@ -105,7 +129,7 @@ public class GestionPrestamos {
 
     // modificar
 
-   public boolean ModificarPrestamoIngenieria(Scanner sc) {
+    public boolean ModificarPrestamoIngenieria(Scanner sc) {
         int forma = V.PedirEnteroRango(sc, "Buscar por: 1: Cedula, 2: Serial", 1, 2);
         EstudianteIngenieria e;
         if (forma == 1) {
@@ -196,7 +220,7 @@ public class GestionPrestamos {
     }
     // devolución
 
-     public boolean DevolverEquipoIngenieria(Scanner sc) {
+    public boolean DevolverEquipoIngenieria(Scanner sc) {
         int forma = V.PedirEnteroRango(sc, "Devolver por: 1: Cedula, 2: Serial", 1, 2);
         EstudianteIngenieria e;
         if (forma == 1) {
@@ -210,7 +234,8 @@ public class GestionPrestamos {
         }
         EliminarEquipo(e.getSerialEquipo());
         ingenieros.remove(e);
-        System.out.println("Devolucion exitosa: se elimino el prestamo de " + e.getNombre() + " " + e.getApellido() + ".");
+        System.out.println(
+                "Devolucion exitosa: se elimino el prestamo de " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
     }
 
@@ -228,11 +253,14 @@ public class GestionPrestamos {
         }
         EliminarEquipo(String.valueOf(e.getSerialEquipo()));
         disenadores.remove(e);
-        System.out.println("Devolucion exitosa: se elimino el prestamo de " + e.getNombre() + " " + e.getApellido() + ".");
+        System.out.println(
+                "Devolucion exitosa: se elimino el prestamo de " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
     }
 
-    /** Agrega al vector portatil o tableta el equipo del estudiante (mismo serial). */
+    /**
+     * Agrega al vector portatil o tableta el equipo del estudiante (mismo serial).
+     */
     private boolean RegistrarEquipo(Scanner sc, String serial) {
         int tipo = V.PedirEnteroRango(sc, "Tipo de equipo: 1: Computador portatil, 2: Tableta grafica", 1, 2);
         String marca = V.PedirLetras(sc, "Ingrese la marca");
@@ -293,9 +321,9 @@ public class GestionPrestamos {
     public boolean ImprimirIngenieros() {
         System.out.println("---- Estudiantes de Ingenieria (" + ingenieros.size() + ") ----");
         for (EstudianteIngenieria e : ingenieros) {
-            System.out.println("Cedula: " + e.getCedula() + " | " + e.getNombre() + " " + e.getApellido()
-                    + " | Tel: " + e.getTelefono() + " | Semestre: " + e.getNumeroSemestre()
-                    + " | Promedio: " + e.getPromedioAcumulado() + " | Serial equipo: " + e.getSerialEquipo());
+            System.out.println("\nCedula: " + e.getCedula() + "\n" + e.getNombre() + " " + e.getApellido()
+                    + "\nTel: " + e.getTelefono() + "\nSemestre: " + e.getNumeroSemestre()
+                    + "\nPromedio: " + e.getPromedioAcumulado() + "\nSerial equipo: " + e.getSerialEquipo());
         }
         return !ingenieros.isEmpty();
     }
@@ -303,9 +331,9 @@ public class GestionPrestamos {
     public boolean ImprimirDisenadores() {
         System.out.println("Estudiantes de Diseno (" + disenadores.size() + ") ");
         for (studianteDiseno e : disenadores) {
-            System.out.println("Cedula: " + e.getCedula() + " | " + e.getNombre() + " " + e.getApellido()
-                    + " | Tel: " + e.getTelefono() + " | Modalidad: " + e.getModalidadEstudio()
-                    + " | Asignaturas: " + e.getCantidadAsignaturas() + " | Serial equipo: " + e.getSerialEquipo());
+            System.out.println("\nCedula: " + e.getCedula() + "\n" + e.getNombre() + " " + e.getApellido()
+                    + "\nTel: " + e.getTelefono() + "\nModalidad: " + e.getModalidadEstudio()
+                    + "\nAsignaturas: " + e.getCantidadAsignaturas() + "\nSerial equipo: " + e.getSerialEquipo());
         }
         return !disenadores.isEmpty();
     }
@@ -313,20 +341,22 @@ public class GestionPrestamos {
     public boolean ImprimirPortatiles() {
         System.out.println("Computadores portatiles (" + portatil.size() + ") ");
         for (ComputadorPortatil c : portatil) {
-            System.out.println("Serial: " + c.getSerial() + " | Marca: " + c.getMarca()
-                    + " | Tamano: " + c.getTamañopulgadas() + " | Precio: " + c.getPrecio()
-                    + " | SO: " + c.getSistemaOperativo() + " | Procesador: " + c.getProcesador());
+            System.out.println("\nSerial: " + c.getSerial() + "\nMarca: " + c.getMarca()
+                    + "\nTamano: " + c.getTamañopulgadas() + "\nPrecio: " + c.getPrecio()
+                    + "\nSO: " + c.getSistemaOperativo() + "\nProcesador: " + c.getProcesador());
         }
         return !portatil.isEmpty();
     }
-
+    
     public boolean ImprimirTabletas() {
         System.out.println("Tabletas graficas (" + tableta.size() + ") ");
         for (TabletaGrafica t : tableta) {
-            System.out.println("Serial: " + t.getSerial() + " | Marca: " + t.getMarca()
-                    + " | Tamano: " + t.getTamañoPulgadas() + " | Precio: " + t.getPrecio()
-                    + " | Peso: " + t.getPesoKg() + " | Almacenamiento: " + t.getAlmacenamiento());
+            System.out.println("\nSerial: " + t.getSerial() + "\nMarca: " + t.getMarca()
+                    + "\nTamano: " + t.getTamañoPulgadas() + "\nPrecio: " + t.getPrecio()
+                    + "\nPeso: " + t.getPesoKg() + "\nAlmacenamiento: " + t.getAlmacenamiento());
         }
         return !tableta.isEmpty();
     }
+
+   
 }

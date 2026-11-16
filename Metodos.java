@@ -1,8 +1,11 @@
+
 import java.util.Scanner;
 
 public class Metodos {
     Validaciones V = new Validaciones();
     GestionPrestamos G = new GestionPrestamos(this);
+
+    
  
     public int SubMenuAlmacenamiento(Scanner sc) {
         System.out.println("Seleccione su Almacenamiento");
@@ -98,12 +101,18 @@ public class Metodos {
         return true;
     }
 
+    
+
     /** Opción 3 del menú principal: imprime los cuatro vectores. */
     public boolean ImprimirInventarioTotal() {
         G.ImprimirIngenieros();
+        System.out.println("=================");
         G.ImprimirDisenadores();
+        System.out.println("=================");
         G.ImprimirPortatiles();
+        System.out.println("=================");
         G.ImprimirTabletas();
+        
         return true;
     }
 }
