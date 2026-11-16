@@ -2,13 +2,8 @@ import java.util.Scanner;
 
 public class Metodos {
     Validaciones V = new Validaciones();
-    GestionPrestamos G = new GestionPrestamos();
-    /*
-     * Método con submenú para almacenamiento:
-     * 256 GB
-     * 512 GB
-     * 1 TB
-     */
+    GestionPrestamos G = new GestionPrestamos(this);
+ 
     public int SubMenuAlmacenamiento(Scanner sc) {
         System.out.println("Seleccione su Almacenamiento");
         System.out.println("1: 256 GB");
@@ -17,13 +12,7 @@ public class Metodos {
         int opt = V.ValidarEntero(sc);
         return opt;
     }
-    /*
-     * Submenú para Sistema Operativo:
-     * Windows 7
-     * Windows 10
-     * Windows 11
-     */
-
+    
     public int SubMenuSistemOperativo(Scanner sc) {
         System.out.println("Seleccione su Sistema Operativo");
         System.out.println("1: Windows 7");
@@ -33,12 +22,6 @@ public class Metodos {
         return opt;
     }
 
-    /*
-     * 
-     * Submenú para Procesador:
-     * AMD Ryzen
-     * Intel Core i5
-     */
     public int SubMenuProcesador(Scanner sc) {
         System.out.println("Seleccione su tipo de procesador");
         System.out.println("1: AMD Ryzen");
@@ -47,11 +30,6 @@ public class Metodos {
         return opt;
     }
 
-    /*
-     * Los datos se validan correctamente según su tipo.
-     * No se permiten caracteres especiales ni números en campos de texto (marca,
-     * serial, etc.).
-     */
     public boolean SubMenuEstuInge(Scanner sc) {
         boolean volver = false;
         while (!volver) {
@@ -73,7 +51,7 @@ public class Metodos {
                     G.DevolverEquipoIngenieria(sc);
                     break;
                 case 4:
-                    // Buscar equipo no hace parte de la HU5
+                    
                     break;
                 case 5:
                     volver = true;
@@ -107,7 +85,7 @@ public class Metodos {
                     G.DevolverEquipoDiseno(sc);
                     break;
                 case 4:
-                    
+
                     break;
                 case 5:
                     volver = true;
@@ -117,6 +95,15 @@ public class Metodos {
                     break;
             }
         }
+        return true;
+    }
+
+    /** Opción 3 del menú principal: imprime los cuatro vectores. */
+    public boolean ImprimirInventarioTotal() {
+        G.ImprimirIngenieros();
+        G.ImprimirDisenadores();
+        G.ImprimirPortatiles();
+        G.ImprimirTabletas();
         return true;
     }
 }

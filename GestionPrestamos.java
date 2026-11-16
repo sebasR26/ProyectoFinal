@@ -5,8 +5,14 @@ public class GestionPrestamos {
 
     private LinkedList<EstudianteIngenieria> ingenieros = new LinkedList<>();
     private LinkedList<studianteDiseno> disenadores = new LinkedList<>();
+    private LinkedList<ComputadorPortatil> portatil = new LinkedList<>();
+    private LinkedList<TabletaGrafica> tableta = new LinkedList<>();
     private Validaciones V = new Validaciones();
+    private Metodos M;
 
+    public GestionPrestamos(Metodos m) {
+        this.M = m;
+    }
     // búsqueda
 
     public EstudianteIngenieria BuscarIngenieroPorCedula(String cedula) {
@@ -71,6 +77,7 @@ public class GestionPrestamos {
         e.setNumeroSemestre(V.PedirEnteroRango(sc, "Ingrese el numero de semestre (1-12)", 1, 12));
         e.setPromedioAcumulado(V.PedirDecimalRango(sc, "Ingrese el promedio acumulado (0.0 - 5.0)", 0f, 5f));
         e.setSerialEquipo(V.PedirLetras(sc, "Ingrese el serial del equipo"));
+        RegistrarEquipo(sc, e.getSerialEquipo());
         ingenieros.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
@@ -90,6 +97,7 @@ public class GestionPrestamos {
         e.setModalidadEstudio(PedirModalidad(sc));
         e.setCantidadAsignaturas(V.PedirEnteroRango(sc, "Ingrese la cantidad de asignaturas (1-12)", 1, 12));
         e.setSerialEquipo(V.PedirEnteroRango(sc, "Ingrese el serial del equipo (numerico)", 1, Integer.MAX_VALUE));
+        RegistrarEquipo(sc, String.valueOf(e.getSerialEquipo()));
         disenadores.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
@@ -188,7 +196,7 @@ public class GestionPrestamos {
     }
     // devolución
 
-    public boolean DevolverEquipoIngenieria(Scanner sc) {
+     public boolean DevolverEquipoIngenieria(Scanner sc) {
         int forma = V.PedirEnteroRango(sc, "Devolver por: 1: Cedula, 2: Serial", 1, 2);
         EstudianteIngenieria e;
         if (forma == 1) {
@@ -200,6 +208,7 @@ public class GestionPrestamos {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
             return false;
         }
+        EliminarEquipo(e.getSerialEquipo());
         ingenieros.remove(e);
         System.out.println("Devolucion exitosa: se elimino el prestamo de " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
@@ -217,8 +226,107 @@ public class GestionPrestamos {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
             return false;
         }
+        EliminarEquipo(String.valueOf(e.getSerialEquipo()));
         disenadores.remove(e);
         System.out.println("Devolucion exitosa: se elimino el prestamo de " + e.getNombre() + " " + e.getApellido() + ".");
         return true;
+    }
+
+    /** Agrega al vector portatil o tableta el equipo del estudiante (mismo serial). */
+    private boolean RegistrarEquipo(Scanner sc, String serial) {
+        int tipo = V.PedirEnteroRango(sc, "Tipo de equipo: 1: Computador portatil, 2: Tableta grafica", 1, 2);
+        String marca = V.PedirLetras(sc, "Ingrese la marca");
+        float tamano = V.PedirDecimalRango(sc, "Ingrese el tamano en pulgadas", 1f, 100f);
+        float precio = V.PedirDecimalRango(sc, "Ingrese el precio", 1f, 100000000f);
+        if (tipo == 1) {
+            ComputadorPortatil c = new ComputadorPortatil();
+            c.setSerial(serial);
+            c.setMarca(marca);
+            c.setTamañopulgadas(tamano);
+            c.setPrecio(precio);
+            c.setSistemaOperativo(M.SubMenuSistemOperativo(sc));
+            c.setProcesador(M.SubMenuProcesador(sc));
+            portatil.add(c);
+        } else {
+            TabletaGrafica t = new TabletaGrafica();
+            t.setSerial(serial);
+            t.setMarca(marca);
+            t.setTamañoPulgadas(tamano);
+            t.setPrecio(precio);
+            t.setPesoKg(V.PedirDecimalRango(sc, "Ingrese el peso en kg", 0.01f, 20f));
+            t.setAlmacenamiento(NombreAlmacenamiento(M.SubMenuAlmacenamiento(sc)));
+            tableta.add(t);
+        }
+        return true;
+    }
+
+    /** Quita del vector correspondiente el equipo con ese serial. */
+    private boolean EliminarEquipo(String serial) {
+        for (ComputadorPortatil c : portatil) {
+            if (c.getSerial().equalsIgnoreCase(serial)) {
+                portatil.remove(c);
+                return true;
+            }
+        }
+        for (TabletaGrafica t : tableta) {
+            if (t.getSerial().equalsIgnoreCase(serial)) {
+                tableta.remove(t);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String NombreAlmacenamiento(int opt) {
+        switch (opt) {
+            case 1:
+                return "256 GB";
+            case 2:
+                return "512 GB";
+            default:
+                return "1 TB";
+        }
+    }
+
+    // Devuelven true si el vector tiene elementos y false si está vacío.
+
+    public boolean ImprimirIngenieros() {
+        System.out.println("---- Estudiantes de Ingenieria (" + ingenieros.size() + ") ----");
+        for (EstudianteIngenieria e : ingenieros) {
+            System.out.println("Cedula: " + e.getCedula() + " | " + e.getNombre() + " " + e.getApellido()
+                    + " | Tel: " + e.getTelefono() + " | Semestre: " + e.getNumeroSemestre()
+                    + " | Promedio: " + e.getPromedioAcumulado() + " | Serial equipo: " + e.getSerialEquipo());
+        }
+        return !ingenieros.isEmpty();
+    }
+
+    public boolean ImprimirDisenadores() {
+        System.out.println("Estudiantes de Diseno (" + disenadores.size() + ") ");
+        for (studianteDiseno e : disenadores) {
+            System.out.println("Cedula: " + e.getCedula() + " | " + e.getNombre() + " " + e.getApellido()
+                    + " | Tel: " + e.getTelefono() + " | Modalidad: " + e.getModalidadEstudio()
+                    + " | Asignaturas: " + e.getCantidadAsignaturas() + " | Serial equipo: " + e.getSerialEquipo());
+        }
+        return !disenadores.isEmpty();
+    }
+
+    public boolean ImprimirPortatiles() {
+        System.out.println("Computadores portatiles (" + portatil.size() + ") ");
+        for (ComputadorPortatil c : portatil) {
+            System.out.println("Serial: " + c.getSerial() + " | Marca: " + c.getMarca()
+                    + " | Tamano: " + c.getTamañopulgadas() + " | Precio: " + c.getPrecio()
+                    + " | SO: " + c.getSistemaOperativo() + " | Procesador: " + c.getProcesador());
+        }
+        return !portatil.isEmpty();
+    }
+
+    public boolean ImprimirTabletas() {
+        System.out.println("Tabletas graficas (" + tableta.size() + ") ");
+        for (TabletaGrafica t : tableta) {
+            System.out.println("Serial: " + t.getSerial() + " | Marca: " + t.getMarca()
+                    + " | Tamano: " + t.getTamañoPulgadas() + " | Precio: " + t.getPrecio()
+                    + " | Peso: " + t.getPesoKg() + " | Almacenamiento: " + t.getAlmacenamiento());
+        }
+        return !tableta.isEmpty();
     }
 }
