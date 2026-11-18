@@ -5,8 +5,6 @@ public class Metodos {
     Validaciones V = new Validaciones();
     GestionPrestamos G = new GestionPrestamos(this);
 
-    
- 
     public int SubMenuAlmacenamiento(Scanner sc) {
         System.out.println("Seleccione su Almacenamiento");
         System.out.println("1: 256 GB");
@@ -15,7 +13,7 @@ public class Metodos {
         int opt = V.ValidarEntero(sc);
         return opt;
     }
-    
+
     public int SubMenuSistemOperativo(Scanner sc) {
         System.out.println("Seleccione su Sistema Operativo");
         System.out.println("1: Windows 7");
@@ -54,7 +52,7 @@ public class Metodos {
                     G.DevolverEquipoIngenieria(sc);
                     break;
                 case 4:
-                    
+
                     break;
                 case 5:
                     volver = true;
@@ -101,8 +99,6 @@ public class Metodos {
         return true;
     }
 
-    
-
     /** Opción 3 del menú principal: imprime los cuatro vectores. */
     public boolean ImprimirInventarioTotal() {
         G.ImprimirIngenieros();
@@ -112,7 +108,7 @@ public class Metodos {
         G.ImprimirPortatiles();
         System.out.println("=================");
         G.ImprimirTabletas();
-        
+
         return true;
     }
 }
