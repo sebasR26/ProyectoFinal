@@ -180,7 +180,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarDisenadorPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
         } else {
-            e = BuscarDisenadorPorSerial(V.PedirNumerico(sc, "Ingrese el serial"));
+            e = BuscarDisenadorPorSerial(V.PedirSerial(sc, "Ingrese el serial"));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
@@ -245,7 +245,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarDisenadorPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
         } else {
-            e = BuscarDisenadorPorSerial(V.PedirNumerico(sc, "Ingrese el serial"));
+            e = BuscarDisenadorPorSerial(V.PedirSerial(sc, "Ingrese el serial"));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
