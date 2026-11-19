@@ -29,7 +29,7 @@ public class Validaciones {
 
     public String PedirLetras(Scanner sc, String mensaje) {
         System.out.println(mensaje);
-        String texto = sc.next();
+        String texto = (sc.next() + sc.nextLine()).trim();
         if (ValidarTexto(texto)) {
             return texto;
         }
