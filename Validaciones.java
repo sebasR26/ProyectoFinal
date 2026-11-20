@@ -46,6 +46,16 @@ public class Validaciones {
         System.out.println("Error: solo se permiten digitos.");
         return PedirNumerico(sc, mensaje);
     }
+    public String LongitudCeluTele(Scanner sc, String mensaje, int longitud) {
+        System.out.println(mensaje);
+        String texto = sc.next();
+        if (ValidarSoloNumeros(texto) && texto.length() == longitud) {
+            return texto;
+        }
+        System.out.println("Error: solo se permiten digitos Numericos o la longitud debe ser de " + longitud + " digitos.");
+        
+        return LongitudCeluTele(sc, mensaje, longitud);
+    }
 
     public int PedirEnteroRango(Scanner sc, String mensaje, int min, int max) {
         System.out.println(mensaje);

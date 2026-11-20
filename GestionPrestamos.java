@@ -71,7 +71,7 @@ public class GestionPrestamos {
     // registro
 
     public boolean RegistrarPrestamoIngenieria(Scanner sc) {
-        String cedula = V.PedirNumerico(sc, "Ingrese la cedula del estudiante");
+        String cedula = V.LongitudCeluTele(sc, "Ingrese la cedula del estudiante", 10);
         if (EstudianteTieneEquipo(cedula)) {
             System.out.println("Error: el estudiante con cedula " + cedula + " ya tiene un equipo asignado.");
             return false;
@@ -80,7 +80,7 @@ public class GestionPrestamos {
         e.setCedula(cedula);
         e.setNombre(V.PedirLetras(sc, "Ingrese el nombre"));
         e.setApellido(V.PedirLetras(sc, "Ingrese el apellido"));
-        e.setTelefono(V.PedirNumerico(sc, "Ingrese el telefono"));
+        e.setTelefono(V.LongitudCeluTele(sc, "Ingrese el telefono", 10));
         e.setNumeroSemestre(V.PedirEnteroRango(sc, "Ingrese el numero de semestre (1-12)", 1, 12));
         e.setPromedioAcumulado(V.PedirDecimalRango(sc, "Ingrese el promedio acumulado (0.0 - 5.0)", 0f, 5f));
 
@@ -100,7 +100,7 @@ public class GestionPrestamos {
     }
 
     public boolean RegistrarPrestamoDiseno(Scanner sc) {
-        String cedula = V.PedirNumerico(sc, "Ingrese la cedula del estudiante");
+        String cedula = V.LongitudCeluTele(sc, "Ingrese la cedula del estudiante", 10);
         if (EstudianteTieneEquipo(cedula)) {
             System.out.println("Error: el estudiante con cedula " + cedula + " ya tiene un equipo asignado.");
             return false;
@@ -109,7 +109,7 @@ public class GestionPrestamos {
         e.setCedula(cedula);
         e.setNombre(V.PedirLetras(sc, "Ingrese el nombre"));
         e.setApellido(V.PedirLetras(sc, "Ingrese el apellido"));
-        e.setTelefono(V.PedirNumerico(sc, "Ingrese el telefono"));
+        e.setTelefono(V.LongitudCeluTele(sc, "Ingrese el telefono", 10));
         e.setModalidadEstudio(PedirModalidad(sc));
         e.setCantidadAsignaturas(V.PedirEnteroRango(sc, "Ingrese la cantidad de asignaturas (1-12)", 1, 12));
 
@@ -133,7 +133,7 @@ public class GestionPrestamos {
         int forma = V.PedirEnteroRango(sc, "Buscar por: 1: Cedula, 2: Serial", 1, 2);
         EstudianteIngenieria e;
         if (forma == 1) {
-            e = BuscarIngenieroPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
+            e = BuscarIngenieroPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
             e = BuscarIngenieroPorSerial(V.PedirLetras(sc, "Ingrese el serial"));
         }
@@ -158,7 +158,7 @@ public class GestionPrestamos {
                 e.setApellido(V.PedirLetras(sc, "Ingrese el nuevo apellido"));
                 break;
             case 3:
-                e.setTelefono(V.PedirNumerico(sc, "Ingrese el nuevo telefono"));
+                e.setTelefono(V.LongitudCeluTele(sc, "Ingrese el nuevo telefono", 10));
                 break;
             case 4:
                 e.setNumeroSemestre(V.PedirEnteroRango(sc, "Ingrese el nuevo semestre (1-12)", 1, 12));
@@ -178,7 +178,7 @@ public class GestionPrestamos {
         int forma = V.PedirEnteroRango(sc, "Buscar por: 1: Cedula, 2: Serial", 1, 2);
         studianteDiseno e;
         if (forma == 1) {
-            e = BuscarDisenadorPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
+            e = BuscarDisenadorPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
             e = BuscarDisenadorPorSerial(V.PedirNumerico(sc, "Ingrese el serial"));
         }
@@ -203,7 +203,7 @@ public class GestionPrestamos {
                 e.setApellido(V.PedirLetras(sc, "Ingrese el nuevo apellido"));
                 break;
             case 3:
-                e.setTelefono(V.PedirNumerico(sc, "Ingrese el nuevo telefono"));
+                e.setTelefono(V.LongitudCeluTele(sc, "Ingrese el nuevo telefono", 10));
                 break;
             case 4:
                 e.setModalidadEstudio(PedirModalidad(sc));
@@ -224,7 +224,7 @@ public class GestionPrestamos {
         int forma = V.PedirEnteroRango(sc, "Devolver por: 1: Cedula, 2: Serial", 1, 2);
         EstudianteIngenieria e;
         if (forma == 1) {
-            e = BuscarIngenieroPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
+            e = BuscarIngenieroPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
             e = BuscarIngenieroPorSerial(V.PedirLetras(sc, "Ingrese el serial"));
         }
@@ -243,7 +243,7 @@ public class GestionPrestamos {
         int forma = V.PedirEnteroRango(sc, "Devolver por: 1: Cedula, 2: Serial", 1, 2);
         studianteDiseno e;
         if (forma == 1) {
-            e = BuscarDisenadorPorCedula(V.PedirNumerico(sc, "Ingrese la cedula"));
+            e = BuscarDisenadorPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
             e = BuscarDisenadorPorSerial(V.PedirNumerico(sc, "Ingrese el serial"));
         }
@@ -265,7 +265,7 @@ public class GestionPrestamos {
         int tipo = V.PedirEnteroRango(sc, "Tipo de equipo: 1: Computador portatil, 2: Tableta grafica", 1, 2);
         String marca = V.PedirLetras(sc, "Ingrese la marca");
         float tamano = V.PedirDecimalRango(sc, "Ingrese el tamano en pulgadas", 1f, 100f);
-        float precio = V.PedirDecimalRango(sc, "Ingrese el precio", 1f, 100000000f);
+        float precio = V.PedirDecimalRango(sc, "Ingrese el precio", 1, 100000000f);
         if (tipo == 1) {
             ComputadorPortatil c = new ComputadorPortatil();
             c.setSerial(serial);
