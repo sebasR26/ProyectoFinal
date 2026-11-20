@@ -10,7 +10,7 @@ public class Metodos {
         System.out.println("1: 256 GB");
         System.out.println("2: 512 GB");
         System.out.println("3: 1 TB");
-        int opt = V.ValidarEntero(sc);
+        int opt = V.PedirEnteroRango(sc, "Almacenamiento", 1, 3);
         return opt;
     }
 
@@ -19,7 +19,7 @@ public class Metodos {
         System.out.println("1: Windows 7");
         System.out.println("2: Windows 10");
         System.out.println("3: Windows 11");
-        int opt = V.ValidarEntero(sc);
+        int opt = V.PedirEnteroRango(sc, null, 0, 0);
         return opt;
     }
 
@@ -27,7 +27,7 @@ public class Metodos {
         System.out.println("Seleccione su tipo de procesador");
         System.out.println("1: AMD Ryzen");
         System.out.println("2: Intel core i5");
-        int opt = V.ValidarEntero(sc);
+        int opt = V.PedirEnteroRango(sc, "SO", 1, 0);
         return opt;
     }
 
