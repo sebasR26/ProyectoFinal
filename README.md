@@ -1,5 +1,5 @@
 # ProyectoFinal
-##Hu4
+#Hu4
 El menú principal incluye las opciones:
 Estudiantes de Ingeniería
 Estudiantes de Diseño
