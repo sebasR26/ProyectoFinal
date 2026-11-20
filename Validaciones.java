@@ -65,13 +65,15 @@ public class Validaciones {
     public float PedirDecimalRango(Scanner sc, String mensaje, float min, float max) {
         System.out.println(mensaje);
         String texto = sc.next().replace(',', '.');
-        try {
-            float valor = Float.parseFloat(texto);
-            if (valor >= min && valor <= max) {
-                return valor;
+        if (texto.matches("-?\\d+(\\.\\d+)?") && !texto.matches("-0+(\\.0+)?")) {
+            try {
+                float valor = Float.parseFloat(texto);
+                if (valor >= min && valor <= max) {
+                    return valor;
+                }
+            } catch (NumberFormatException e) {
+                // cae al mensaje de error
             }
-        } catch (NumberFormatException e) {
-            // cae al mensaje de error
         }
         System.out.println("Error: ingrese un numero decimal entre " + min + " y " + max + ".");
         return PedirDecimalRango(sc, mensaje, min, max);
