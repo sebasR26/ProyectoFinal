@@ -342,7 +342,7 @@ public class GestionPrestamos {
         System.out.println("Computadores portatiles (" + portatil.size() + ") ");
         for (ComputadorPortatil c : portatil) {
             System.out.println("\nSerial: " + c.getSerial() + "\nMarca: " + c.getMarca()
-                    + "\nTamano: " + c.getTamañopulgadas() + "\nPrecio: " + c.getPrecio()
+                    +  "\nTamano: " + c.getTamañopulgadas() + "\nPrecio: " + String.format("%.2f", c.getPrecio())
                     + "\nSO: " + c.getSistemaOperativo() + "\nProcesador: " + c.getProcesador());
         }
         return !portatil.isEmpty();
@@ -352,7 +352,7 @@ public class GestionPrestamos {
         System.out.println("Tabletas graficas (" + tableta.size() + ") ");
         for (TabletaGrafica t : tableta) {
             System.out.println("\nSerial: " + t.getSerial() + "\nMarca: " + t.getMarca()
-                    + "\nTamano: " + t.getTamañoPulgadas() + "\nPrecio: " + t.getPrecio()
+                    + "\nTamano: " + t.getTamañoPulgadas() + "\nPrecio: " + String.format("%.2f", t.getPrecio())
                     + "\nPeso: " + t.getPesoKg() + "\nAlmacenamiento: " + t.getAlmacenamiento());
         }
         return !tableta.isEmpty();
