@@ -9,10 +9,11 @@ public class main {
         Scanner sc = new Scanner(System.in);
         boolean cont = true;
         while (cont) {
-            System.out.println("\n1: Estudiantes de Ingeniería");
+            System.out.println("1: Estudiantes de Ingeniería");
             System.out.println("2: Estudiantes de Diseño");
             System.out.println("3: Imprimir inventario total");
-            System.out.println("4: Salir del programa");
+            System.out.println("4: Exportar inventario");
+            System.out.println("5: Salir del programa");
 
             int opt = V.ValidarEntero(sc);
             switch (opt) {
@@ -29,6 +30,9 @@ public class main {
 
                     break;
                 case 4:
+                    M.ExportarInventario();
+                    break;
+                case 5:
                     System.out.println("Hasta luego");
                     cont = false;
                     break;

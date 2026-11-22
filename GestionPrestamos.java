@@ -10,6 +10,22 @@ public class GestionPrestamos {
     private Validaciones V = new Validaciones();
     private Metodos M;
 
+    public LinkedList<EstudianteIngenieria> getIngenieros() {
+        return ingenieros;
+    }
+
+    public LinkedList<studianteDiseno> getDisenadores() {
+        return disenadores;
+    }
+
+    public LinkedList<ComputadorPortatil> getPortatil() {
+        return portatil;
+    }
+
+    public LinkedList<TabletaGrafica> getTableta() {
+        return tableta;
+    }
+
     public GestionPrestamos(Metodos m) {
         this.M = m;
     }
@@ -91,8 +107,6 @@ public class GestionPrestamos {
         }
         e.setSerialEquipo(serial);
 
-
-
         RegistrarEquipo(sc, e.getSerialEquipo());
         ingenieros.add(e);
         System.out.println("Prestamo registrado correctamente para " + e.getNombre() + " " + e.getApellido() + ".");
@@ -119,7 +133,6 @@ public class GestionPrestamos {
             return false;
         }
         e.setSerialEquipo(serial);
-
 
         RegistrarEquipo(sc, String.valueOf(serial));
         disenadores.add(e);
@@ -347,7 +360,7 @@ public class GestionPrestamos {
         }
         return !portatil.isEmpty();
     }
-    
+
     public boolean ImprimirTabletas() {
         System.out.println("Tabletas graficas (" + tableta.size() + ") ");
         for (TabletaGrafica t : tableta) {
@@ -358,5 +371,4 @@ public class GestionPrestamos {
         return !tableta.isEmpty();
     }
 
-   
 }
