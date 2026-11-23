@@ -100,7 +100,7 @@ public class GestionPrestamos {
         e.setNumeroSemestre(V.PedirEnteroRango(sc, "Ingrese el numero de semestre (1-12)", 1, 12));
         e.setPromedioAcumulado(V.PedirDecimalRango(sc, "Ingrese el promedio acumulado (0.0 - 5.0)", 0f, 5f));
 
-        String serial = V.PedirLetras(sc, "Ingrese el serial del equipo");
+        String serial = V.PedirSerial(sc, "Ingrese el serial del equipo");
         if (serialDuplicado(serial)) {
             System.out.println("Error: el equipo con serial: " + serial + " ya esta asignado.");
             return false;
@@ -148,7 +148,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarIngenieroPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
-            e = BuscarIngenieroPorSerial(V.PedirLetras(sc, "Ingrese el serial"));
+            e = BuscarIngenieroPorSerial(V.PedirSerial(sc, "Ingrese el serial"));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
@@ -193,7 +193,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarDisenadorPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
-            e = BuscarDisenadorPorSerial(V.PedirNumerico(sc, "Ingrese el serial"));
+            e = BuscarDisenadorPorSerial(String.valueOf(V.PedirEnteroRango(sc, "Ingrese el serial", 1, Integer.MAX_VALUE)));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
@@ -239,7 +239,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarIngenieroPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
-            e = BuscarIngenieroPorSerial(V.PedirLetras(sc, "Ingrese el serial"));
+            e = BuscarIngenieroPorSerial(V.PedirSerial(sc, "Ingrese el serial"));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
@@ -258,7 +258,7 @@ public class GestionPrestamos {
         if (forma == 1) {
             e = BuscarDisenadorPorCedula(V.LongitudCeluTele(sc, "Ingrese la cedula", 10));
         } else {
-            e = BuscarDisenadorPorSerial(V.PedirNumerico(sc, "Ingrese el serial"));
+            e = BuscarDisenadorPorSerial(String.valueOf(V.PedirEnteroRango(sc, "Ingrese el serial", 1, Integer.MAX_VALUE)));
         }
         if (e == null) {
             System.out.println("Error: no se encontro un prestamo con ese dato.");
@@ -355,7 +355,7 @@ public class GestionPrestamos {
         System.out.println("Computadores portatiles (" + portatil.size() + ") ");
         for (ComputadorPortatil c : portatil) {
             System.out.println("\nSerial: " + c.getSerial() + "\nMarca: " + c.getMarca()
-                    + "\nTamano: " + c.getTamañopulgadas() + "\nPrecio: " + c.getPrecio()
+                    +  "\nTamano: " + c.getTamañopulgadas() + "\nPrecio: " + String.format("%.2f", c.getPrecio())
                     + "\nSO: " + c.getSistemaOperativo() + "\nProcesador: " + c.getProcesador());
         }
         return !portatil.isEmpty();
@@ -365,7 +365,7 @@ public class GestionPrestamos {
         System.out.println("Tabletas graficas (" + tableta.size() + ") ");
         for (TabletaGrafica t : tableta) {
             System.out.println("\nSerial: " + t.getSerial() + "\nMarca: " + t.getMarca()
-                    + "\nTamano: " + t.getTamañoPulgadas() + "\nPrecio: " + t.getPrecio()
+                    + "\nTamano: " + t.getTamañoPulgadas() + "\nPrecio: " + String.format("%.2f", t.getPrecio())
                     + "\nPeso: " + t.getPesoKg() + "\nAlmacenamiento: " + t.getAlmacenamiento());
         }
         return !tableta.isEmpty();

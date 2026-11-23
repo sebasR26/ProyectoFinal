@@ -1,0 +1,7 @@
+Serial: 1
+Marca: a
+Tamano: 5.0
+Precio: 2.0
+Sistema Operativo: Windows 11
+Procesador: Intel core i5
+----------------------------------------

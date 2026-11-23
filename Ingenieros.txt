@@ -1,0 +1,8 @@
+Cedula: 1234567890
+Nombre: jhom
+Apellido: torres
+Telefono: 1234567890
+Semestre: 3
+Promedio: 2.0
+Serial Equipo: 1
+----------------------------------------

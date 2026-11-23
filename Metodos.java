@@ -1,4 +1,4 @@
-
+ 
 import java.util.Scanner;
 
 public class Metodos {
@@ -113,86 +113,82 @@ public class Metodos {
         return true;
     }
 
-    public boolean BuscarEquipo(Scanner sc) {
-        Validaciones V = new Validaciones();
-        System.out.println("aqui:");
-        String serial = V.PedirLetras(sc, "Ingrese el serial del equipo");
-        if (serial.isEmpty()) {
-            System.out.println("Error: no hay registros de serial.");
-            return false;
-        } else {
-            for (EstudianteIngenieria e : G.getIngenieros()) {
-                if (e.getSerialEquipo().equals(serial)) {
-                    System.out.println("Equipo encontrado en la lista de estudiantes de Ingeniería:");
-                    System.out.println(e);
-                    for (ComputadorPortatil p : G.getPortatil()) {
-                        if (p.getSerial().equals(serial)) {
-                            System.out.println("Equipo encontrado en la lista de portátiles:");
-                            System.out.println(p.getSerial());
-                            System.out.println(p.getMarca());
-                            System.out.println(p.getPrecio());
-                            System.out.println(p.getProcesador());
-                            System.out.println(p.getSistemaOperativo());
-                            System.out.println(p.getTamañopulgadas());
-                            System.out.println("================================");
-
-                            return true;
-                        }
-                    }
-                    for (TabletaGrafica t : G.getTableta()) {
-                        if (t.getSerial().equals(serial)) {
-                            System.out.println("Equipo encontrado en la lista de tabletas gráficas:");
-                            System.out.println(t.getSerial());
-                            System.out.println(t.getMarca());
-                            System.out.println(t.getPrecio());
-                            System.out.println(t.getTamañoPulgadas());
-                            System.out.println(t.getPesoKg());
-                            System.out.println(t.getAlmacenamiento());
-                            System.out.println("================================");
-                            return true;
-                        }
-                    }
-                    return true;
-                }
-            }
-            for (studianteDiseno e : G.getDisenadores()) {
-                if (e.getSerialEquipo().equals(serial)) {
-                    System.out.println("Equipo encontrado en la lista de estudiantes de Diseño:");
-                    System.out.println(e);
-                    for (ComputadorPortatil p : G.getPortatil()) {
-                        if (p.getSerial().equals(serial)) {
-                            System.out.println("Equipo encontrado en la lista de portátiles:");
-                            System.out.println(p.getSerial());
-                            System.out.println(p.getMarca());
-                            System.out.println(p.getPrecio());
-                            System.out.println(p.getProcesador());
-                            System.out.println("sistema operativo: " + NombreSO(p.getSistemaOperativo()) + "\n");
-                            System.out.println(p.getTamañopulgadas());
-                            System.out.println("================================");
-                            return true;
-                        }
-                    }
-                    for (TabletaGrafica t : G.getTableta()) {
-                        if (t.getSerial().equals(serial)) {
-                            System.out.println("Equipo encontrado en la lista de tabletas gráficas:");
-                            System.out.println(t.getSerial());
-                            System.out.println(t.getMarca());
-                            System.out.println(t.getPrecio());
-                            System.out.println(t.getTamañoPulgadas());
-                            System.out.println(t.getPesoKg());
-                            System.out.println(t.getAlmacenamiento());
-                            System.out.println("================================");
-                            return true;
-                        }
-                    }
-                    return true;
-                }
-            }
-            System.out.println("No se encontró el equipo con serial: " + serial);
-            return false;
+    private boolean MostrarEquipo(String serial) {
+    for (ComputadorPortatil p : G.getPortatil()) {
+        if (p.getSerial().equalsIgnoreCase(serial)) {
+            System.out.println("Equipo encontrado en la lista de portátiles:");
+            System.out.println("Serial: " + p.getSerial());
+            System.out.println("Marca: " + p.getMarca());
+            System.out.println("Precio: " + p.getPrecio());
+            System.out.println("Tamaño: " + p.getTamañopulgadas());
+            System.out.println("Sistema operativo: " + NombreSO(p.getSistemaOperativo()));
+            System.out.println("Procesador: " + NombreProcesador(p.getProcesador()));
+            System.out.println("================================");
+            return true;
         }
-
     }
+    for (TabletaGrafica t : G.getTableta()) {
+        if (t.getSerial().equalsIgnoreCase(serial)) {
+            System.out.println("Equipo encontrado en la lista de tabletas gráficas:");
+            System.out.println("Serial: " + t.getSerial());
+            System.out.println("Marca: " + t.getMarca());
+            System.out.println("Precio: " + t.getPrecio());
+            System.out.println("Tamaño: " + t.getTamañoPulgadas());
+            System.out.println("Peso: " + t.getPesoKg());
+            System.out.println("Almacenamiento: " + t.getAlmacenamiento());
+            System.out.println("================================");
+            return true;
+        }
+    }
+    return false;
+}
+
+private String NombreProcesador(int procesador) {
+    switch (procesador) {
+        case 1:
+            return "AMD Ryzen";
+        case 2:
+            return "Intel core i5";
+        default:
+            return "Desconocido";
+    }
+}
+
+private String NombreSO(int sistemaOperativo) {
+    switch (sistemaOperativo) {
+        case 1:
+            return "Windows 7";
+        case 2:
+            return "Windows 10";
+        case 3:
+            return "Windows 11";
+        default:
+            return "Desconocido";
+    }
+}
+
+public boolean BuscarEquipo(Scanner sc) {
+    String serial = V.PedirSerial(sc, "Ingrese el serial del equipo");
+
+    for (EstudianteIngenieria e : G.getIngenieros()) {
+        if (e.getSerialEquipo().equalsIgnoreCase(serial)) {
+            System.out.println("Equipo encontrado en la lista de estudiantes de Ingeniería:");
+            System.out.println("Cedula: " + e.getCedula() + " - " + e.getNombre() + " " + e.getApellido());
+            MostrarEquipo(serial);
+            return true;
+        }
+    }
+    for (studianteDiseno e : G.getDisenadores()) {
+        if (String.valueOf(e.getSerialEquipo()).equals(serial)) {
+            System.out.println("Equipo encontrado en la lista de estudiantes de Diseño:");
+            System.out.println("Cedula: " + e.getCedula() + " - " + e.getNombre() + " " + e.getApellido());
+            MostrarEquipo(serial);
+            return true;
+        }
+    }
+    System.out.println("No se encontró el equipo con serial: " + serial);
+    return false;
+}
 
     public boolean ExportarInventario() {
         ExportarArchivo x = new ExportarArchivo();
