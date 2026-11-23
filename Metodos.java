@@ -1,27 +1,25 @@
-
+ 
 import java.util.Scanner;
 
 public class Metodos {
     Validaciones V = new Validaciones();
     GestionPrestamos G = new GestionPrestamos(this);
 
-    
- 
     public int SubMenuAlmacenamiento(Scanner sc) {
         System.out.println("Seleccione su Almacenamiento");
         System.out.println("1: 256 GB");
         System.out.println("2: 512 GB");
         System.out.println("3: 1 TB");
-        int opt = V.ValidarEntero(sc);
+        int opt = V.PedirEnteroRango(sc, "Almacenamiento", 1, 3);
         return opt;
     }
-    
+
     public int SubMenuSistemOperativo(Scanner sc) {
         System.out.println("Seleccione su Sistema Operativo");
         System.out.println("1: Windows 7");
         System.out.println("2: Windows 10");
         System.out.println("3: Windows 11");
-        int opt = V.ValidarEntero(sc);
+        int opt = V.PedirEnteroRango(sc, "", 1, 3);
         return opt;
     }
 
@@ -29,7 +27,7 @@ public class Metodos {
         System.out.println("Seleccione su tipo de procesador");
         System.out.println("1: AMD Ryzen");
         System.out.println("2: Intel core i5");
-        int opt = V.ValidarEntero(sc);
+        int opt = V.PedirEnteroRango(sc, "", 1, 2);
         return opt;
     }
 
@@ -54,7 +52,7 @@ public class Metodos {
                     G.DevolverEquipoIngenieria(sc);
                     break;
                 case 4:
-                    
+
                     break;
                 case 5:
                     volver = true;
@@ -101,8 +99,6 @@ public class Metodos {
         return true;
     }
 
-    
-
     /** Opción 3 del menú principal: imprime los cuatro vectores. */
     public boolean ImprimirInventarioTotal() {
         G.ImprimirIngenieros();
@@ -112,7 +108,7 @@ public class Metodos {
         G.ImprimirPortatiles();
         System.out.println("=================");
         G.ImprimirTabletas();
-        
+
         return true;
     }
 }
