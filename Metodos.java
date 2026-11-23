@@ -19,7 +19,7 @@ public class Metodos {
         System.out.println("1: Windows 7");
         System.out.println("2: Windows 10");
         System.out.println("3: Windows 11");
-        int opt = V.PedirEnteroRango(sc, "", 1, 3);
+        int opt = V.PedirEnteroRango(sc, "Sistema Operativo", 1, 3);
         return opt;
     }
 
@@ -27,11 +27,11 @@ public class Metodos {
         System.out.println("Seleccione su tipo de procesador");
         System.out.println("1: AMD Ryzen");
         System.out.println("2: Intel core i5");
-        int opt = V.PedirEnteroRango(sc, "", 1, 2);
+        int opt = V.PedirEnteroRango(sc, "Procesador", 1, 2);
         return opt;
     }
 
-    public boolean SubMenuEstuInge(Scanner sc) {
+    public boolean SubMenuEstuInge(Scanner sc, Metodos M) {
         boolean volver = false;
         while (!volver) {
             System.out.println("Que deseas Realizar");
@@ -52,7 +52,7 @@ public class Metodos {
                     G.DevolverEquipoIngenieria(sc);
                     break;
                 case 4:
-
+                    M.BuscarEquipo(sc);
                     break;
                 case 5:
                     volver = true;
@@ -65,7 +65,7 @@ public class Metodos {
         return true;
     }
 
-    public boolean SubMenuEstuDiseño(Scanner sc) {
+    public boolean SubMenuEstuDiseño(Scanner sc, Metodos M) {
         boolean volver = false;
         while (!volver) {
             System.out.println("Que deseas Realizar");
@@ -86,6 +86,7 @@ public class Metodos {
                     G.DevolverEquipoDiseno(sc);
                     break;
                 case 4:
+                    M.BuscarEquipo(sc);
 
                     break;
                 case 5:
@@ -99,7 +100,7 @@ public class Metodos {
         return true;
     }
 
-    /** Opción 3 del menú principal: imprime los cuatro vectores. */
+  
     public boolean ImprimirInventarioTotal() {
         G.ImprimirIngenieros();
         System.out.println("=================");
@@ -110,5 +111,87 @@ public class Metodos {
         G.ImprimirTabletas();
 
         return true;
+    }
+
+    private boolean MostrarEquipo(String serial) {
+    for (ComputadorPortatil p : G.getPortatil()) {
+        if (p.getSerial().equalsIgnoreCase(serial)) {
+            System.out.println("Equipo encontrado en la lista de portátiles:");
+            System.out.println("Serial: " + p.getSerial());
+            System.out.println("Marca: " + p.getMarca());
+            System.out.println("Precio: " + p.getPrecio());
+            System.out.println("Tamaño: " + p.getTamañopulgadas());
+            System.out.println("Sistema operativo: " + NombreSO(p.getSistemaOperativo()));
+            System.out.println("Procesador: " + NombreProcesador(p.getProcesador()));
+            System.out.println("================================");
+            return true;
+        }
+    }
+    for (TabletaGrafica t : G.getTableta()) {
+        if (t.getSerial().equalsIgnoreCase(serial)) {
+            System.out.println("Equipo encontrado en la lista de tabletas gráficas:");
+            System.out.println("Serial: " + t.getSerial());
+            System.out.println("Marca: " + t.getMarca());
+            System.out.println("Precio: " + t.getPrecio());
+            System.out.println("Tamaño: " + t.getTamañoPulgadas());
+            System.out.println("Peso: " + t.getPesoKg());
+            System.out.println("Almacenamiento: " + t.getAlmacenamiento());
+            System.out.println("================================");
+            return true;
+        }
+    }
+    return false;
+}
+
+private String NombreProcesador(int procesador) {
+    switch (procesador) {
+        case 1:
+            return "AMD Ryzen";
+        case 2:
+            return "Intel core i5";
+        default:
+            return "Desconocido";
+    }
+}
+
+private String NombreSO(int sistemaOperativo) {
+    switch (sistemaOperativo) {
+        case 1:
+            return "Windows 7";
+        case 2:
+            return "Windows 10";
+        case 3:
+            return "Windows 11";
+        default:
+            return "Desconocido";
+    }
+}
+
+public boolean BuscarEquipo(Scanner sc) {
+    String serial = V.PedirSerial(sc, "Ingrese el serial del equipo");
+
+    for (EstudianteIngenieria e : G.getIngenieros()) {
+        if (e.getSerialEquipo().equalsIgnoreCase(serial)) {
+            System.out.println("Equipo encontrado en la lista de estudiantes de Ingeniería:");
+            System.out.println("Cedula: " + e.getCedula() + " - " + e.getNombre() + " " + e.getApellido());
+            MostrarEquipo(serial);
+            return true;
+        }
+    }
+    for (studianteDiseno e : G.getDisenadores()) {
+        if (String.valueOf(e.getSerialEquipo()).equals(serial)) {
+            System.out.println("Equipo encontrado en la lista de estudiantes de Diseño:");
+            System.out.println("Cedula: " + e.getCedula() + " - " + e.getNombre() + " " + e.getApellido());
+            MostrarEquipo(serial);
+            return true;
+        }
+    }
+    System.out.println("No se encontró el equipo con serial: " + serial);
+    return false;
+}
+
+    public boolean ExportarInventario() {
+        ExportarArchivo x = new ExportarArchivo();
+        return x.ExportarInventarioTotal(G.getIngenieros(), G.getDisenadores(), G.getPortatil(), G.getTableta());
     }
 }
