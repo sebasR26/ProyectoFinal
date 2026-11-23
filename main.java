@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         
     
@@ -18,12 +18,11 @@ public class main {
             int opt = V.ValidarEntero(sc);
             switch (opt) {
                 case 1:
-                    M.SubMenuEstuInge(sc);
+                    M.SubMenuEstuInge(sc, M);
 
                     break;
                 case 2:
-                    M.SubMenuEstuDiseño(sc);
-
+                    M.SubMenuEstuDiseño(sc, M);
                     break;
                 case 3:
                     M.ImprimirInventarioTotal();

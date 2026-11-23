@@ -127,8 +127,8 @@ public class GestionPrestamos {
         e.setModalidadEstudio(PedirModalidad(sc));
         e.setCantidadAsignaturas(V.PedirEnteroRango(sc, "Ingrese la cantidad de asignaturas (1-12)", 1, 12));
 
-        int serial = V.PedirEnteroRango(sc, "Ingrese el serial del equipo", 1, Integer.MAX_VALUE);
-        if (serialDuplicado(String.valueOf(serial))) {
+        String serial = V.PedirLetras(sc, "Ingrese el serial del equipo");
+        if (serialDuplicado((serial))) {
             System.out.println("Error: el equipo con serial: " + serial + " ya esta asignado.");
             return false;
         }

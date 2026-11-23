@@ -5,7 +5,7 @@ public class studianteDiseno {
     private String Telefono;
     private String ModalidadEstudio; // Virtual o Presencial
     private int CantidadAsignaturas;
-    private int SerialEquipo;
+    private String SerialEquipo;
 
     public studianteDiseno() {
     }
@@ -58,11 +58,11 @@ public class studianteDiseno {
         CantidadAsignaturas = cantidadAsignaturas;
     }
 
-    public int getSerialEquipo() {
+    public String getSerialEquipo() {
         return SerialEquipo;
     }
 
-    public void setSerialEquipo(int serialEquipo) {
+    public void setSerialEquipo(String serialEquipo) {
         SerialEquipo = serialEquipo;
     }
 
