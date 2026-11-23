@@ -100,7 +100,7 @@ public class Metodos {
         return true;
     }
 
-    /** Opción 3 del menú principal: imprime los cuatro vectores. */
+  
     public boolean ImprimirInventarioTotal() {
         G.ImprimirIngenieros();
         System.out.println("=================");

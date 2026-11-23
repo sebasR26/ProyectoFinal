@@ -113,9 +113,6 @@ public class ExportarArchivo {
         boolean d = ExportarTabletas(tabletas);
         return a || b || c || d;
     }
-
-    // En el modelo SO y procesador son int; aqui se escribe el nombre legible
-    // (mismos valores que los submenus de Metodos).
     private String NombreSO(int opt) {
         switch (opt) {
             case 1:
@@ -130,37 +127,5 @@ public class ExportarArchivo {
     private String NombreProcesador(int opt) {
         return opt == 1 ? "AMD Ryzen" : "Intel core i5";
     }
-/* 
-    public void exportarArchivo(LinkedList<EstudianteIngenieria> ingenieros) {
-        if (ingenieros.isEmpty()) {
-            GestionPrestamos G = new GestionPrestamos();
-           
-            ingenieros = G.RegistrarPrestamoIngenieria(ingenieros);
-        } else {
-            try (FileWriter escriba = new FileWriter("EstudiantesIngenieria.txt")) {
-                for (EstudianteIngenieria i : ingenieros) {
-                    escriba.write("Nombre: " + i.getNombre() + "\n");
-                    escriba.write("Apellido: " + i.getApellido() + "\n");
-                    escriba.write("Cedula: " + i.getCedula() + "\n");
-                    escriba.write("Telefono: " + i.getTelefono() + "\n");
-                    escriba.write("Numero Semestre: " + i.getNumeroSemestre() + "\n");
-                    escriba.write("Promedio Acumulado: " + i.getPromedioAcumulado() + "\n");
-                    escriba.write("Serial Equipo: " + i.getSerialEquipo() + "\n");
-                    if (i instanceof tabletagr) {
-                        equipo c = (equipo) i;
-                        escriba.write("Cantidad Puertas: " + c.getNumeroPuertas() + "\n");
-                    } else {
-                        Moto m = (Moto) i;
-                        escriba.write("Tipo Motor: " + m.getTipoMotor() + "\n");
-                    }
-                    escriba.write("---------------------------------------\n");
-                }
 
-                System.out.println("Archivo exportado correctamente");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }*/
 }
